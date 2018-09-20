@@ -17,6 +17,8 @@ class TechCrunch::Cli
     puts "2. Einstin Voice gives Salesforce users gift of the gab (by Ron Miller, 23 hours)"
   end 
   
+  
+  
   def user_input
     input = nil 
     
@@ -38,6 +40,7 @@ class TechCrunch::Cli
       end 
     end 
   end 
+  
   
 #end of class
 end 
