@@ -1,3 +1,6 @@
 #!/usr/bin/env ruby
 
-puts "hello"
+require "./lib/tech_crunch"
+
+TechCrunch::Cli.new.test
+
