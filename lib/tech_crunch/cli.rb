@@ -30,8 +30,11 @@ class TechCrunch::Cli
       elsif input == "2" 
         puts "This is article 2 XXX"
         
-      else
-        puts "I'm sorry that is not a valid input"
+      elsif input == "exit"
+        puts "Goodbye, have a nice day :)"
+        
+      else 
+        puts "I'm sorry that is not a valid response"
       end 
     end 
   end 
