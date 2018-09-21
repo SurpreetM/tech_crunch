@@ -2,13 +2,28 @@ require 'pry'
 class TechCrunch::Cli 
   
   #this is the main cli that is called from the bin file. 
-  def call
+  def run
+    #make_articles
+    #add_article_body
     list_articles
     user_input
   end 
   
+  def make_articles
+    #this method needs to take an array of articles from the scraper class 
+    #articles_array = Scraper.scrape_home_page(url)
+    #next it needs to create new Article objects 
+  end 
+  
+  def add_article_body
+    #This method should add the article body to the article object already created from the method make_articles. 
+    
+  end 
+  
   
   def list_articles
+    # This should run through articles.all and display the necessary attributes for each article object. 
+    
     puts "Here are today's articles:"
     
     #Article 1 Title, Author & Time since publication
