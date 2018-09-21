@@ -3,7 +3,8 @@ require 'pry'
 class TechCrunch::Scraper
 
   def home_page(url)
-    Nokogiri::HTML(open(url))
+    doc = Nokogiri::HTML(open(url))
+    binding.pry
   end 
 
 
