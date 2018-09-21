@@ -21,15 +21,6 @@ class TechCrunch::Article
   def self.all 
     @@all 
   end 
-    
-    
-  end 
-  
-  
-  
-  
-  
-  
   
 #end of class  
 end 

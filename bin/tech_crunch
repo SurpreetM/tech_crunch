@@ -2,5 +2,5 @@
 
 require "./lib/tech_crunch"
 
-TechCrunch::Cli.new.call
+TechCrunch::Cli.new.run
 
