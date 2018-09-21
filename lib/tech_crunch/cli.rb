@@ -1,3 +1,4 @@
+require 'pry'
 class TechCrunch::Cli 
   
   #this is the main cli that is called from the bin file. 
