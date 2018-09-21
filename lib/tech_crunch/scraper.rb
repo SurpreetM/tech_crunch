@@ -5,6 +5,9 @@ class TechCrunch::Scraper
   def home_page(url)
     doc = Nokogiri::HTML(open(url))
     container = doc.search(".river div")
+    articles = container.css(".post-block")
+    
+    article_title = articles.css(".post-block__title a")[0].text.strip
     
     binding.pry
     
