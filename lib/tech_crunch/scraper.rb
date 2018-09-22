@@ -14,27 +14,30 @@ class TechCrunch::Scraper
     
     article_publish_time = container.css(".river-byline time").attribute("datetime").value
         
+    
+   
+  end
+  
+  def self.scrape_home_page(url)
+    
+    doc = Nokogiri::HTML(open(url))
+    
+    container = doc.search(".river div").css(".post-block")
+    
+    articles_array = []
+    
+    container.each do |article|
+      article_title = article.css(".post-block__title a").text.strip
+      article_author = article.css(".river-byline__authors a").text.strip
+      article_publish_time = article.css(".river-byline time").attribute("datetime").value
+      articles_array << {:title = article_title, :time_published = article_publish_time, :author = article_author}
+    end 
+    
+    articles_array
+    
     binding.pry
     
-   
-    
-  end
-    
-  
-
-
-   
-    
- 
-    
-    # the first article seems to be index 2 in the array.
-    # article_title = container.css(".post-block__title a")[2].text.strip
-    # author = container.css(".river-byline__authors a")[2].text.strip
-    # Will need to convert this into the number of hours since this value. 
-    # time_published = container.css(".river-byline time")[2].attribute("datetime").value
-    
-   
-
+  end 
 
 #end of class   
 end 
