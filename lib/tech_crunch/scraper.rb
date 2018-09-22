@@ -2,7 +2,7 @@ require 'pry'
 
 class TechCrunch::Scraper
 
-  def home_page(url)
+  def homepage(url)
     doc = Nokogiri::HTML(open(url))
     
     container = doc.search(".river div").css(".post-block")
@@ -18,7 +18,7 @@ class TechCrunch::Scraper
    
   end
   
-  def self.scrape_home_page(url)
+  def self.scrape_homepage(url)
     
     doc = Nokogiri::HTML(open(url))
     
@@ -30,7 +30,7 @@ class TechCrunch::Scraper
       article_title = article.css(".post-block__title a").text.strip
       article_author = article.css(".river-byline__authors a").text.strip
       article_publish_time = article.css(".river-byline time").attribute("datetime").value
-      articles_array << {:title = article_title, :time_published = article_publish_time, :author = article_author}
+      articles_array << {title: article_title, time_published: article_publish_time, author: article_author}
     end 
     
     articles_array

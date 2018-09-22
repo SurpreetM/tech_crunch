@@ -2,5 +2,5 @@
 
 require "./lib/tech_crunch"
 
-TechCrunch::Scraper.new.scrape_home_page(url)
+TechCrunch::Scraper.new.scrape_homepage("https://techcrunch.com/")
 
