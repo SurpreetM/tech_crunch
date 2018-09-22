@@ -4,4 +4,5 @@ Environment - May want to tidy the relationships up so all the gems and require_
 
 Next Steps
 
-Articles - need to consider what variables this article class needs  
+Need to test the CLI using the scrape_homepage method.
+Need to update the format of the time published to be e.g. "2 hours ago"

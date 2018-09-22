@@ -5,7 +5,7 @@ class TechCrunch::Article
   
   @@all = []
   
-  def self.create_articles_from_homepage(articles_array)
+  def self.create_articles_from_homepage_scrape(articles_array)
     articles_array. each do |article_hash|
       Article.new(article_hash)
     end 
