@@ -22,5 +22,10 @@ class TechCrunch::Article
     @@all
   end
 
+  def self.clear
+    @@all.clear
+  end
+
+
 #end of class
 end
