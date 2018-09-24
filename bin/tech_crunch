@@ -2,5 +2,4 @@
 
 require "./lib/tech_crunch"
 
-TechCrunch::Scraper.scrape_homepage("https://techcrunch.com/")
-
+TechCrunch::Article.run
