@@ -3,28 +3,18 @@ class TechCrunch::Cli
 
   #this is the main cli that is called from the bin file.
   def run
-    # step 1: Scrape the homepage for article title, author and time published
-    articles_array = TechCrunch::Scraper.scrape_homepage("https://techcrunch.com/")
-
-    # step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
-    TechCrunch::Article.clear
-    TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
-
-    # step 3: Add in the article content to the article object
+    make_articles
     #add_article_body
-
-    # step 4: List the articles users can select from
     list_articles
-
-    # step 5: Ask for user input into what they would like to do (select article to read or exit)
     user_input
-
   end
 
   def make_articles
-    #this method needs to take an array of articles from the scraper class
-    #articles_array = Scraper.scrape_home_page(url)
-    #next it needs to create new Article objects
+    # step 1: Scrape the homepage for article title, author and time published
+    articles_array = TechCrunch::Scraper.scrape_homepage("https://techcrunch.com/")
+    # step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
+    TechCrunch::Article.clear
+    TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
   end
 
   def add_article_body
