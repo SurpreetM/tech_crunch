@@ -6,7 +6,7 @@ class TechCrunch::Cli
     # step 1: Scrape the homepage for article title, author and time published
     articles_array = TechCrunch::Scraper.scrape_homepage("https://techcrunch.com/")
 
-    # step 2: Create article objects from the array scraped
+    # step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
     TechCrunch::Article.clear
     TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
 
@@ -46,33 +46,32 @@ class TechCrunch::Cli
 
 
   def user_input
+
     input = nil
 
-    while input != "exit"
     puts "Please enter the number of the article you would like to read otherwise type EXIT to leave or LIST to view latest articles"
 
     input = gets.strip.downcase
 
       if input == "1"
         puts "This is article 1 XXX"
+        user_input
 
       elsif input == "2"
         puts "This is article 2 XXX"
+        user_input
 
-      # This isn't quite working correctly. When user types in list, it re-runs the programme.
-      # If user then types in exit, the input variable is still saves as list
+      elsif input == "exit"
+        puts "Goodbye and have a nice day :)"
+
       elsif input == "list"
         run
 
-      elsif input == "exit"
-        binding.pry
-        puts "Goodbye and have a nice day :)"
-
       else
         puts "I'm sorry that is not a valid response"
+        user_input
       end
 
-    end
   end
 
 
