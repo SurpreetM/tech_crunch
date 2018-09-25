@@ -1,10 +1,13 @@
 require 'pry'
 class TechCrunch::Cli
 
+  homepage = "https://techcrunch.com/"
+
+
   #this is the main cli that is called from the bin file.
   def run
     make_articles
-    #add_article_body
+    add_article_content
     list_articles
     user_input
   end
@@ -17,9 +20,12 @@ class TechCrunch::Cli
     TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
   end
 
-  def add_article_body
+  def add_article_content
     #This method should add the article body to the article object already created from the method make_articles.
-
+    TechCrunch::Article.all.each do |article|
+      article_content = TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/25/hps-tango-looks-like-a-book-so-you-can-hide-your-printer-shame/")
+      article.add_article_content(article_content)
+    end
   end
 
 

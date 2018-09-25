@@ -1,7 +1,7 @@
 require 'pry'
 class TechCrunch::Article
 
-  attr_accessor :title, :time_published, :author
+  attr_accessor :title, :time_published, :author, :content
 
   @@all = []
 
@@ -16,6 +16,10 @@ class TechCrunch::Article
       self.send("#{attribute}=", value)
     end
     @@all << self
+  end
+
+  def add_article_content(article_content)
+    @content = article_content
   end
 
   def self.all

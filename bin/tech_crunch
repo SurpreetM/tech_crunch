@@ -2,4 +2,4 @@
 
 require "./lib/tech_crunch"
 
-TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/25/hps-tango-looks-like-a-book-so-you-can-hide-your-printer-shame/")
+TechCrunch::Cli.new.run
