@@ -5,7 +5,8 @@ class TechCrunch::Cli
 
   def testing_url
     make_articles
-    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[0].title.downcase.strip.gsub(" ", "-")
+    #not currently working as it's not removing the apostrophes.
+    url = HOMEPAGE + "#{TechCrunch::Article.all[5].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[5].title.to_s.gsub(/[ ']/, ' ' => '_').downcase
     puts url
   end
 
@@ -29,7 +30,7 @@ class TechCrunch::Cli
   def add_article_content
     #This method should add the article body to the article object already created from the method make_articles.
     TechCrunch::Article.all.each do |article|
-      article_content = TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/25/hps-tango-looks-like-a-book-so-you-can-hide-your-printer-shame/")
+      article_content = TechCrunch::Scraper.scrape_article_content(HOMEPAGE + ("https://techcrunch.com/2018/09/25/hps-tango-looks-like-a-book-so-you-can-hide-your-printer-shame/")
       article.add_article_content(article_content)
     end
   end
