@@ -1,7 +1,7 @@
 require 'pry'
 class TechCrunch::Cli
 
-  homepage = "https://techcrunch.com/"
+  HOMEPAGE = "https://techcrunch.com/"
 
 
   #this is the main cli that is called from the bin file.
@@ -14,7 +14,7 @@ class TechCrunch::Cli
 
   def make_articles
     # step 1: Scrape the homepage for article title, author and time published
-    articles_array = TechCrunch::Scraper.scrape_homepage("https://techcrunch.com/")
+    articles_array = TechCrunch::Scraper.scrape_homepage(HOMEPAGE)
     # step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
     TechCrunch::Article.clear
     TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
@@ -30,7 +30,7 @@ class TechCrunch::Cli
 
 
   def list_articles
-    # This should run through articles.all and display the necessary attributes for each article object.
+    # This runs through articles.all and displays the title, author and time published for each article object.
     puts "Here are today's articles:"
 
     TechCrunch::Article.all.each.with_index(1) do |article, index|
@@ -45,11 +45,11 @@ class TechCrunch::Cli
 
     input = nil
 
-    puts "Please enter the number of the article you would like to read otherwise type EXIT to leave or LIST to view latest articles"
+    puts "Please enter the number of the article (1 - 20) that you would like to read, otherwise type EXIT to leave or LIST to view latest articles"
 
     input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i < 21
         puts TechCrunch::Article.all[input.to_i - 1].content
         user_input
 
