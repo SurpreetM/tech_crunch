@@ -3,6 +3,12 @@ class TechCrunch::Cli
 
   HOMEPAGE = "https://techcrunch.com/"
 
+  def testing_url
+    make_articles
+    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[0].title.downcase.strip.gsub(" ", "-")
+    puts url
+  end
+
 
   #this is the main cli that is called from the bin file.
   def run
