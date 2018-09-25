@@ -36,14 +36,12 @@ class TechCrunch::Scraper
     container = doc.search(".article-content").css(".p1")
 
      container.each do |paragraph|
-       # need to add paragraph spacing to make it easier to read
-       article_content << paragraph.css(".s1").text
+       # the line space to the end quote separates the paragraphs with a line break.
+       article_content << "#{paragraph.css(".s1").text}
+
+"
      end
-     article_content
-    # = container.css(".p1")[0]
-
-    #paragraph_text = paragraphs.css(."s1").text
-
+    article_content
     binding.pry
   end
 
