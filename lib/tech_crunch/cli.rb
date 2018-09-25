@@ -49,12 +49,8 @@ class TechCrunch::Cli
 
     input = gets.strip.downcase
 
-      if input == "1"
-        puts "This is article 1 XXX"
-        user_input
-
-      elsif input == "2"
-        puts "This is article 2 XXX"
+      if input.to_i > 0
+        puts TechCrunch::Article.all[input.to_i - 1].content
         user_input
 
       elsif input == "exit"
