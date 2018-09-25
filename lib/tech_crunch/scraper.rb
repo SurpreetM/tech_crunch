@@ -32,12 +32,12 @@ class TechCrunch::Scraper
   def self.scrape_article_content(url)
     # Placeholder to scrape the main article and add this to the associated article hash within the articles_array.
     doc = Nokogiri::HTML(open(url))
-    article_content = nil
+    article_content = ""
     container = doc.search(".article-content").css(".p1")
 
      container.each do |paragraph|
-       #need to add each paragraph - currently the next para is overwriting the previous
-       article_content = paragraph.css(".s1").text
+       # need to add paragraph spacing to make it easier to read
+       article_content << paragraph.css(".s1").text
      end
      article_content
     # = container.css(".p1")[0]
