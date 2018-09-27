@@ -32,14 +32,15 @@ class TechCrunch::Scraper
   def self.scrape_article_content(url)
     doc = Nokogiri::HTML(open(url))
     article_content = ""
-    container = doc.search(".article-content").css(".p1")
+    container = doc.search(".article-content p")
 
      container.each do |paragraph|
        # the line space to the end quote separates the paragraphs with a line break.
-       article_content << "#{paragraph.css(".s1").text}
-
+       article_content << "#{paragraph.text}
+       
 "
       end
+
     article_content
   end
 

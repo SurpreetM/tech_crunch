@@ -30,7 +30,7 @@ class TechCrunch::Cli
   def add_article_content
     #This method should add the article body to the article object already created from the method make_articles.
     TechCrunch::Article.all.each do |article|
-      article_content = TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/27/rally-rd-the-app-that-lets-you-invest-in-classic-cars-raises-7m-series-a/")
+      article_content = TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/27/amazons-thursday-night-football-live-stream-will-feature-real-time-stats-amazon-com-shopping/")
       article.add_article_content(article_content)
     end
   end
