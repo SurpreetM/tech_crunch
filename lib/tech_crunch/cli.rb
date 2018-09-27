@@ -34,8 +34,14 @@ class TechCrunch::Cli
 
     #This method adds the article body to the content attribute of article object already created from the method make_articles.
     TechCrunch::Article.all.each do |article|
-      article_content = TechCrunch::Scraper.scrape_article_content(url)
-      article.add_article_content(article_content)
+      article_url = HOMEPAGE + "#{article.time_published.gsub("-", "/")}/" + "#{article.title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").gsub("--","-").downcase}/"
+      begin
+        article_content = TechCrunch::Scraper.scrape_article_content(article_url)
+      rescue
+        article.content = "I'm sorry we're having trouble dispaying this article"
+      else
+        article.add_article_content(article_content)
+      end
     end
   end
 
