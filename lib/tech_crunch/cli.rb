@@ -6,8 +6,8 @@ class TechCrunch::Cli
   def testing_url
     make_articles
     #not currently working as it's not removing the apostrophes.
-    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[0].title.to_s.gsub(/[^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase
-    puts url
+    url1 = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + "#{TechCrunch::Article.all[0].title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase}/"
+    puts url1
   end
 
 
@@ -28,9 +28,13 @@ class TechCrunch::Cli
   end
 
   def add_article_content
-    #This method should add the article body to the article object already created from the method make_articles.
+    #need to update the url so it does not remove "-" from the title.
+
+    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + "#{TechCrunch::Article.all[0].title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase}/"
+
+    #This method adds the article body to the content attribute of article object already created from the method make_articles.
     TechCrunch::Article.all.each do |article|
-      article_content = TechCrunch::Scraper.scrape_article_content("https://techcrunch.com/2018/09/27/amazons-thursday-night-football-live-stream-will-feature-real-time-stats-amazon-com-shopping/")
+      article_content = TechCrunch::Scraper.scrape_article_content(url)
       article.add_article_content(article_content)
     end
   end
