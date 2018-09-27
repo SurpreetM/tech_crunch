@@ -3,16 +3,8 @@ class TechCrunch::Cli
 
   HOMEPAGE = "https://techcrunch.com/"
 
-  def testing_url
-    make_articles
-    #not currently working as it's not removing the apostrophes.
-    url1 = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + "#{TechCrunch::Article.all[0].title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase}/"
-    puts url1
-  end
-
-
-  #this is the main cli that is called from the bin file.
   def run
+    # Main cli that is called from the bin file.
     make_articles
     add_article_content
     list_articles
@@ -20,25 +12,22 @@ class TechCrunch::Cli
   end
 
   def make_articles
-    # step 1: Scrape the homepage for article title, author and time published
+    # Step 1: Scrape the homepage for article title, author and time published
     articles_array = TechCrunch::Scraper.scrape_homepage(HOMEPAGE)
-    # step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
+    # Step 2: Deletes any pre-existing article objects and creates article objects from the latest articles array scraped
     TechCrunch::Article.clear
     TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
   end
 
   def add_article_content
-    #need to update the url so it does not remove "-" from the title.
-
     url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + "#{TechCrunch::Article.all[0].title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase}/"
-
-    #This method adds the article body to the content attribute of article object already created from the method make_articles.
+    # Adds the article body to the content attribute of article object created from make_articles.
     TechCrunch::Article.all.each do |article|
       article_url = HOMEPAGE + "#{article.time_published.gsub("-", "/")}/" + "#{article.title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").gsub("--","-").downcase}/"
       begin
         article_content = TechCrunch::Scraper.scrape_article_content(article_url)
       rescue
-        article.content = "I'm sorry we're having trouble dispaying this article"
+        article.content = "I'm sorry we're having trouble dispaying this article".colorize(:red)
       else
         article.add_article_content(article_content)
       end
@@ -47,40 +36,32 @@ class TechCrunch::Cli
 
 
   def list_articles
-    # This runs through articles.all and displays the title, author and time published for each article object.
-    puts "Here are today's articles:"
-
+    # Runs through articles.all and displays the title, author and time published for each article object.
+    puts "Welcome! Here are the latest TechCrunch articles:".colorize(:blue)
+    puts "----------------------------------------------------------------------".colorize(:green)
     TechCrunch::Article.all.each.with_index(1) do |article, index|
-      puts "#{index}. #{article.title}, by #{article.author} (#{article.time_published})
-      "
+      puts "#{index}. #{article.title}. By #{article.author} (#{article.time_published})"
     end
   end
 
 
-
   def user_input
-
     input = nil
-
-    puts "Please enter the number of the article (1 - 20) that you would like to read, otherwise type EXIT to leave or LIST to view latest articles"
-
+    puts "----------------------------------------------------------------------".colorize(:green)
+    puts "Please enter the number of the article (1 - 20) that you would like to read, otherwise type EXIT to leave or LIST to view latest article list".colorize(:blue)
     input = gets.strip.downcase
-
       if input.to_i > 0 && input.to_i < 21
+        puts TechCrunch::Article.all[input.to_i - 1].title.upcase
         puts TechCrunch::Article.all[input.to_i - 1].content
         user_input
-
       elsif input == "exit"
-        puts "Goodbye and have a nice day :)"
-
+        puts "Goodbye & have a nice day :)".colorize(:blue)
       elsif input == "list"
         run
-
       else
-        puts "I'm sorry that is not a valid response"
+        puts "I'm sorry that is not a valid response".colorize(:blue)
         user_input
       end
-
   end
 
 

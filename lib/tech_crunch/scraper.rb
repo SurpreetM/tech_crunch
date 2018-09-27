@@ -2,20 +2,9 @@ require 'pry'
 
 class TechCrunch::Scraper
 
-
-  def items_to_scrape(url)
-    # This method will need to be deleted - only used for checking the html tags to scrape.
-    doc = Nokogiri::HTML(open(url))
-    container = doc.search(".river div").css(".post-block")
-    article_title = container.css(".post-block__title a").text.strip
-    article_author = container.css(".river-byline__authors a").text.strip
-    article_publish_time = container.css(".river-byline time").attribute("datetime").value
-  end
-
   def self.scrape_homepage(url)
     # This method scrapes the homepage and produces and array of articles in the format
     # [ {title1, time_published1, author1}, {title2, time_published2, author2} ]
-
     doc = Nokogiri::HTML(open(url))
     container = doc.search(".river div").css(".post-block")
     articles_array = []
@@ -26,8 +15,10 @@ class TechCrunch::Scraper
       article_publish_time = "#{article.css(".river-byline time").attribute("datetime").value}"[0..9]
       articles_array << {title: article_title, time_published: article_publish_time, author: article_author}
     end
+
     articles_array
   end
+
 
   def self.scrape_article_content(url)
     doc = Nokogiri::HTML(open(url))
@@ -35,14 +26,15 @@ class TechCrunch::Scraper
     container = doc.search(".article-content p")
 
      container.each do |paragraph|
-       # the line space to the end quote separates the paragraphs with a line break.
+       # The line space to the end quote separates the paragraphs with a line break.
        article_content << "#{paragraph.text}
-       
+
 "
       end
-
+      
     article_content
   end
+
 
 #end of class
 end
