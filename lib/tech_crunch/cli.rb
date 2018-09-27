@@ -6,7 +6,7 @@ class TechCrunch::Cli
   def testing_url
     make_articles
     #not currently working as it's not removing the apostrophes.
-    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[0].title.to_s.gsub(/[^[:alnum:]^[" "]]/,"").gsub(" ", "-").downcase
+    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + TechCrunch::Article.all[0].title.to_s.gsub(/[^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase
     puts url
   end
 
