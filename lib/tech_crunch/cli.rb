@@ -51,6 +51,8 @@ class TechCrunch::Cli
     puts "Please enter the number of the article (1 - 20) that you would like to read, otherwise type EXIT to leave or LIST to view latest article list".colorize(:blue)
     input = gets.strip.downcase
       if input.to_i > 0 && input.to_i < 21
+        # This is a valid article reference.
+        # Displays the article title followed by the content.
         puts TechCrunch::Article.all[input.to_i - 1].title.upcase
         puts TechCrunch::Article.all[input.to_i - 1].content
         user_input
@@ -59,6 +61,7 @@ class TechCrunch::Cli
       elsif input == "list"
         run
       else
+        # This is an invalid input.
         puts "I'm sorry that is not a valid response".colorize(:blue)
         user_input
       end
