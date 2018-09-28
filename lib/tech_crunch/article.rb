@@ -1,7 +1,7 @@
 require 'pry'
 class TechCrunch::Article
 
-  attr_accessor :title, :time_published, :author, :content
+  attr_accessor :title, :time_published, :author, :content, :url
 
   @@all = []
 
