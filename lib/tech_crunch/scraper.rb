@@ -11,7 +11,7 @@ class TechCrunch::Scraper
 
     container.each do |article|
       article_title = article.css(".post-block__title a").text.strip
-      article_author = article.css(".river-byline__authors a").text.strip
+      article_author = article.css(".river-byline__authors a").text.strip.gsub("\n",", ").gsub("\t","")
       article_publish_time = "#{article.css(".river-byline time").attribute("datetime").value}"[0..9]
       article_url = article.css(".post-block__title a").attribute("href").value
       articles_array << {title: article_title, time_published: article_publish_time, author: article_author, url: article_url}
