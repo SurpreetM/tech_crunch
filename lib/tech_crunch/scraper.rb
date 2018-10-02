@@ -1,5 +1,3 @@
-require 'pry'
-
 class TechCrunch::Scraper
 
   def self.scrape_homepage(url)
@@ -21,8 +19,8 @@ class TechCrunch::Scraper
   end
 
 
-  def self.scrape_article_content(url)
-    doc = Nokogiri::HTML(open(url))
+  def self.scrape_article_content(article)
+    doc = Nokogiri::HTML(open(article.url))
     article_content = ""
     container = doc.search(".article-content p")
 
@@ -33,7 +31,7 @@ class TechCrunch::Scraper
 "
       end
 
-    article_content
+    article.content = article_content
   end
 
 
