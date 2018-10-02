@@ -21,29 +21,6 @@ class TechCrunch::Cli
     TechCrunch::Article.create_articles_from_homepage_scrape(articles_array)
   end
 
-  def add_article_content
-    TechCrunch::Article.all.each do |article|
-      article_content = TechCrunch::Scraper.scrape_article_content(article.url)
-      article.add_article_content(article_content)
-    end
-  end
-
-  def add_article_content_old
-    url = HOMEPAGE + "#{TechCrunch::Article.all[0].time_published.gsub("-", "/")}/" + "#{TechCrunch::Article.all[0].title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").downcase}/"
-    # Adds the article body to the content attribute of article object created from make_articles.
-    TechCrunch::Article.all.each do |article|
-      article_url = HOMEPAGE + "#{article.time_published.gsub("-", "/")}/" + "#{article.title.to_s.gsub(/[^-^[:alnum:]^[" "]^["."]]/,"").gsub(" ", "-").gsub(".","-").gsub("--","-").downcase}/"
-      begin
-        article_content = TechCrunch::Scraper.scrape_article_content(article_url)
-      rescue
-        article.content = "I'm sorry we're having trouble dispaying this article".colorize(:red)
-      else
-        article.add_article_content(article_content)
-      end
-    end
-  end
-
-
   def list_articles
     # Runs through articles.all and displays the title, author and time published for each article object.
     puts "Welcome! Here are the latest TechCrunch articles:".colorize(:blue)

@@ -17,18 +17,9 @@ class TechCrunch::Article
     @@all << self
   end
 
-  def add_article_content(article_content)
-    @content = article_content
-  end
-
   def self.all
     @@all
   end
-
-  def self.clear
-    @@all.clear
-  end
-
 
 #end of class
 end
